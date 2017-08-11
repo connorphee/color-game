@@ -1,0 +1,16 @@
+.col-md-3 {
+	background-color: black;
+	height: 150px;
+	margin: 2% 4%;
+	border-radius: 25px;
+	box-shadow: 10px 5px 5px black;
+}
+
+#gameHeader {
+	text-align: center;
+}
+
+#playDiv {
+	text-align: center;
+	visibility: hidden;
+}

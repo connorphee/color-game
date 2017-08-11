@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Color Game</title>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<h1 id="gameHeader">This is the Color Game</h1>
+
+<div class="row">
+	<div class="col-md-3" id="block1" onclick="endGame(this)"></div>
+	<div class="col-md-3" id="block2" onclick="endGame(this)"></div>
+	<div class="col-md-3" id="block3" onclick="endGame(this)"></div>
+</div>
+<div class="row">
+	<div class="col-md-3" id="block4" onclick="endGame(this)"></div>
+	<div class="col-md-3" id="block5" onclick="endGame(this)"></div>
+	<div class="col-md-3" id="block6" onclick="endGame(this)"></div>
+</div>
+<div id="playDiv">
+	<button type="submit" class="btn btn-success" id="playButton" onclick="startGame()">YES</button>
+</div>
+<script type="text/javascript" src="app.js"></script>
+</body>
+</html>
