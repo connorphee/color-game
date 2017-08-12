@@ -1,9 +1,9 @@
-.col-md-3 {
+.colorBlock {
 	background-color: black;
 	height: 150px;
 	margin: 2% 4%;
 	border-radius: 25px;
-	box-shadow: 10px 5px 5px black;
+	box-shadow: 5px 5px 5px black;
 }
 
 #gameHeader {
