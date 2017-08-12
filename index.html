@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Color Game</title>
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
@@ -9,17 +10,17 @@
 <h1 id="gameHeader">This is the Color Game</h1>
 
 <div class="row">
-	<div class="col-md-3 colorBlock" id="block1" onclick="endGame(this)"></div>
-	<div class="col-md-3 colorBlock" id="block2" onclick="endGame(this)"></div>
-	<div class="col-md-3 colorBlock" id="block3" onclick="endGame(this)"></div>
+	<div class="col-md-3 colorBlock roundedCorners" id="block1" onclick="endGame(this)"></div>
+	<div class="col-md-3 colorBlock roundedCorners" id="block2" onclick="endGame(this)"></div>
+	<div class="col-md-3 colorBlock roundedCorners" id="block3" onclick="endGame(this)"></div>
 </div>
 <div class="row">
-	<div class="col-md-3 colorBlock" id="block4" onclick="endGame(this)"></div>
-	<div class="col-md-3 colorBlock" id="block5" onclick="endGame(this)"></div>
-	<div class="col-md-3 colorBlock" id="block6" onclick="endGame(this)"></div>
+	<div class="col-md-3 colorBlock roundedCorners" id="block4" onclick="endGame(this)"></div>
+	<div class="col-md-3 colorBlock roundedCorners" id="block5" onclick="endGame(this)"></div>
+	<div class="col-md-3 colorBlock roundedCorners" id="block6" onclick="endGame(this)"></div>
 </div>
 <div id="playDiv">
-	<button type="submit" class="btn btn-success" id="playButton" onclick="startGame()">YES</button>
+	<button type="submit" class="btn btn-secondary" id="playButton" onclick="startGame()">YES</button>
 </div>
 <script type="text/javascript" src="app.js"></script>
 </body>

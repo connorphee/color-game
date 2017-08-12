@@ -9,7 +9,7 @@ let gameOver = false;
 let startGame = function () {
 	setTimeout(function () {
 		gameOver = false;
-		assignColors();
+		assignColor(blocks);
 		pickAnswer();
 		gameHeader.innerHTML = `Guess the color: ` + answer;
 		playButton.style.visibility = `hidden`;
@@ -19,11 +19,12 @@ let startGame = function () {
 let endGame = function (selection) {
 	if (!gameOver) {
 		isRightAnswer = checkAnswer(selection);
-		isRightAnswer ? updateInnerHtml(`YOU WIN`, gameHeader) : updateInnerHtml(`YOU LOSE`, gameHeader);
+		isRightAnswer ? updateInnerHtml(`YOU WIN`, gameHeader) : updateInnerHtml(`YOU LOSE. This was the right color`, gameHeader);
 		playButton.style.visibility = `visible`;
 		updateInnerHtml(`Restart`, playButton);
 		playButton.onclick = startGame;
 		gameOver = true;
+		assignColor(blocks, answer);
 	}
 }
 
@@ -36,10 +37,14 @@ let updateInnerHtml = function (text, objectToUpdate) {
 	objectToUpdate.innerHTML = text;
 }
 
-let assignColors = function () {
-	blocks.forEach(function(block) {
-		block.style.backgroundColor = generateColor();
-	});
+let assignColor = function (needsColor, color) {
+	if (needsColor.isArray()) {
+		needsColor.forEach(function (item) {
+			item.style.backgroundColor = color ? color : generateColor();
+		});
+	} else {
+		needsColor.style.backgroundColor = color ? color : generateColor();
+	}
 }
 
 let checkAnswer = function (selection) {
