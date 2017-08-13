@@ -9,10 +9,6 @@ body {
 	box-shadow: 5px 5px 5px black;
 }
 
-#gameHeader {
-	text-align: center;
-}
-
 #playDiv {
 	text-align: center;
 	visibility: hidden;
@@ -20,4 +16,8 @@ body {
 
 .roundedCorners {
 	border-radius: 25px;
+}
+
+.centeredText {
+	text-align: center;
 }

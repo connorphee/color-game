@@ -7,7 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<h1 id="gameHeader">This is the Color Game</h1>
+<h1 id="gameHeader" class="centeredText">This is the Color Game</h1>
 
 <div class="row">
 	<div class="col-md-3 colorBlock roundedCorners" id="block1" onclick="endGame(this)"></div>
@@ -20,7 +20,12 @@
 	<div class="col-md-3 colorBlock roundedCorners" id="block6" onclick="endGame(this)"></div>
 </div>
 <div id="playDiv">
-	<button type="submit" class="btn btn-secondary" id="playButton" onclick="startGame()">YES</button>
+	<button type="submit" class="btn btn-secondary" id="playButton" 
+		onclick="startGame()">YES</button>
+</div>
+<div class="centeredText" id="scoreDiv">
+	<span id="numberCorrect">Number Correct: 0</span>
+	<span id="numberIncorrect">Number Incorrect: 0</span>
 </div>
 <script type="text/javascript" src="app.js"></script>
 </body>

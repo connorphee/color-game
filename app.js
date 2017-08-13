@@ -2,6 +2,8 @@ const gameHeader = document.getElementById(`gameHeader`);
 const playDiv = document.getElementById(`playDiv`);
 const playButton = document.getElementById(`playButton`);
 const blocks = document.querySelectorAll(`.colorBlock`);
+const correctCountElement = document.getElementById(`numberCorrect`);
+const incorrectCountElement = document.getElementById(`numberIncorrect`);
 const blocksArray = [];
 
 /* Put blocks in array because querySelectorAll returns a node list rather than array
@@ -13,6 +15,8 @@ blocks.forEach(function (block) {
 let answer;
 let isRightAnswer;
 let gameOver = false;
+let correct = 0;
+let incorrect = 0;
 
 let startGame = function () {
 	setTimeout(function () {
@@ -27,12 +31,15 @@ let startGame = function () {
 let endGame = function (selection) {
 	if (!gameOver) {
 		isRightAnswer = checkAnswer(selection);
+		updateScore();
 		isRightAnswer ? updateInnerHtml(`YOU WIN`, gameHeader) : updateInnerHtml(`YOU LOSE. This was the right color`, gameHeader);
+		updateScoreText();
 		playButton.style.visibility = `visible`;
 		updateInnerHtml(`Restart`, playButton);
 		playButton.onclick = startGame;
 		gameOver = true;
 		assignColor(blocksArray, answer);
+		console.log(correct + ` ` + incorrect);
 	}
 }
 
@@ -43,6 +50,15 @@ let pickAnswer = function () {
 
 let updateInnerHtml = function (text, objectToUpdate) {
 	objectToUpdate.innerHTML = text;
+}
+
+let updateScore = function () {
+	isRightAnswer ? correct++ : incorrect++;
+}
+
+let updateScoreText = function () {
+	isRightAnswer ? updateInnerHtml(`Number Correct: ${correct}`, correctCountElement) 
+			: updateInnerHtml(`Number Incorrect: ${incorrect}`, incorrectCountElement);
 }
 
 let assignColor = function (needsColor, color) {
