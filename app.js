@@ -2,6 +2,14 @@ const gameHeader = document.getElementById(`gameHeader`);
 const playDiv = document.getElementById(`playDiv`);
 const playButton = document.getElementById(`playButton`);
 const blocks = document.querySelectorAll(`.colorBlock`);
+const blocksArray = [];
+
+/* Put blocks in array because querySelectorAll returns a node list rather than array
+   which does not allow for checking of isArray and other native array methods
+*/
+blocks.forEach(function (block) {
+	blocksArray.push(block);
+})
 let answer;
 let isRightAnswer;
 let gameOver = false;
@@ -9,7 +17,7 @@ let gameOver = false;
 let startGame = function () {
 	setTimeout(function () {
 		gameOver = false;
-		assignColor(blocks);
+		assignColor(blocksArray);
 		pickAnswer();
 		gameHeader.innerHTML = `Guess the color: ` + answer;
 		playButton.style.visibility = `hidden`;
@@ -24,13 +32,13 @@ let endGame = function (selection) {
 		updateInnerHtml(`Restart`, playButton);
 		playButton.onclick = startGame;
 		gameOver = true;
-		assignColor(blocks, answer);
+		assignColor(blocksArray, answer);
 	}
 }
 
 let pickAnswer = function () {
 	let num = Math.floor(Math.random() * 6);
-	answer = blocks[num].style.backgroundColor;
+	answer = blocksArray[num].style.backgroundColor;
 }
 
 let updateInnerHtml = function (text, objectToUpdate) {
@@ -38,7 +46,7 @@ let updateInnerHtml = function (text, objectToUpdate) {
 }
 
 let assignColor = function (needsColor, color) {
-	if (needsColor.isArray()) {
+	if (Array.isArray(needsColor)) {
 		needsColor.forEach(function (item) {
 			item.style.backgroundColor = color ? color : generateColor();
 		});
