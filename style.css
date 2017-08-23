@@ -1,12 +1,12 @@
 body {
-	font-family: 'Ubuntu', sans-serif;
+	font-family: 'Lobster', cursive;
 }
 
 .colorBlock {
 	background-color: black;
 	height: 150px;
 	margin: 2% 4%;
-	box-shadow: 5px 5px 5px black;
+	box-shadow: 0 0 5px black;
 }
 
 #playDiv {
@@ -20,4 +20,9 @@ body {
 
 .centeredText {
 	text-align: center;
+}
+
+.centeredText {
+	margin-top: 15px;
+	font-size: 2.5em;
 }
