@@ -2,8 +2,10 @@ const gameHeader = document.getElementById(`gameHeader`);
 const playDiv = document.getElementById(`playDiv`);
 const playButton = document.getElementById(`playButton`);
 const blocks = document.querySelectorAll(`.colorBlock`);
-const correctCountElement = document.getElementById(`numberCorrect`);
-const incorrectCountElement = document.getElementById(`numberIncorrect`);
+const totalCorrectCountElement = document.getElementById(`totalCorrect`);
+const totalIncorrectCountElement = document.getElementById(`totalIncorrect`);
+const actualCorrectCountElement = document.getElementById(`actualCorrect`);
+const highscoreElement = document.getElementById(`highscore`);
 const blocksArray = [];
 
 /* Put blocks in array because querySelectorAll returns a node list rather than array
@@ -16,7 +18,9 @@ let answer;
 let isRightAnswer;
 let gameOver = false;
 let correct = 0;
+let actualCorrect = 0;
 let incorrect = 0;
+let highscore = 0;
 
 let startGame = function () {
 	setTimeout(function () {
@@ -53,12 +57,29 @@ let updateInnerHtml = function (text, objectToUpdate) {
 }
 
 let updateScore = function () {
-	isRightAnswer ? correct++ : incorrect++;
+	if(isRightAnswer){
+		correct++;
+		actualCorrect++;
+	}else{
+		incorrect++;
+		actualCorrect = 0;
+	}
+	actualCorrect > highscore ? highscore = actualCorrect : highscore = highscore;
 }
 
+
 let updateScoreText = function () {
-	isRightAnswer ? updateInnerHtml(`Number Correct: ${correct}`, correctCountElement) 
-			: updateInnerHtml(`Number Incorrect: ${incorrect}`, incorrectCountElement);
+	if(isRightAnswer){
+		updateInnerHtml(`Total Correct: ${correct}`, totalCorrectCountElement);
+		updateInnerHtml(`Actual Correct: ${actualCorrect}`, actualCorrectCountElement);
+	}else{
+		updateInnerHtml(`Total Incorrect: ${incorrect}`, totalIncorrectCountElement);
+		updateInnerHtml(`Actual Correct: ${actualCorrect}`, actualCorrectCountElement);
+	}
+
+	if(correct >= highscore){
+		updateInnerHtml(`Highscore: ${highscore}`, highscoreElement);
+	}
 }
 
 let assignColor = function (needsColor, color) {
