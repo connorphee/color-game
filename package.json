@@ -1,0 +1,26 @@
+{
+  "name": "color-game",
+  "version": "1.0.0",
+  "description": "The color game provides an RGB color code, along with six blocks of randomlyselected colors. One of the blocks is the color of the RGB code provided. To win, select the correct color provided in the RGB code.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/connorphee/color-game.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/connorphee/color-game/issues"
+  },
+  "homepage": "https://github.com/connorphee/color-game#readme",
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  },
+  "dependencies": {
+    "express": "^4.16.1"
+  }
+}
