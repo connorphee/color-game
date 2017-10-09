@@ -9,7 +9,10 @@
 </head>
 <body>
 <h1 id="gameHeader" class="centeredText">This is the Color Game</h1>
-
+<div class="centeredText">
+	<span id="actualCorrect">Current Score: 0</span>
+	<span id="highscore">Highscore: </span>
+</div>
 <div class="row">
 	<div class="col-md-3 colorBlock roundedCorners" id="block1" onclick="endGame(this)"></div>
 	<div class="col-md-3 colorBlock roundedCorners" id="block2" onclick="endGame(this)"></div>
@@ -21,13 +24,23 @@
 	<div class="col-md-3 colorBlock roundedCorners" id="block6" onclick="endGame(this)"></div>
 </div>
 <div id="playDiv">
-	<button type="submit" class="btn btn-secondary" id="playButton" 
+	<button type="submit" class="btn btn-secondary" id="playButton"
 		onclick="startGame()">YES</button>
 </div>
 <div class="centeredText" id="scoreDiv">
-	<span id="numberCorrect">Number Correct: 0</span>
-	<span id="numberIncorrect">Number Incorrect: 0</span>
+	<span id="totalCorrect">Total Correct: 0</span>
+	<span id="totalIncorrect">Total Incorrect: 0</span>
 </div>
+<div id="formSender">
+	<form onsubmit="return false">
+  <span class	="formFont">Name:</span><br>
+  <input type="text" name="name" id="name">
+  <br>
+  <br>
+  <button type="button" value="Submit" onclick="sendScore()">Send!</button>
+</form>
+</div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript" src="app.js"></script>
 </body>
 </html>
