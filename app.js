@@ -7,6 +7,7 @@ const totalIncorrectCountElement = document.getElementById(`totalIncorrect`);
 const actualCorrectCountElement = document.getElementById(`actualCorrect`);
 const highscoreElement = document.getElementById(`highscore`);
 const blocksArray = [];
+// import sendScore from './requests.js';
 
 /* Put blocks in array because querySelectorAll returns a node list rather than array
    which does not allow for checking of isArray and other native array methods
@@ -21,9 +22,11 @@ let correct = 0;
 let actualCorrect = 0;
 let incorrect = 0;
 let highscore = 0;
+let hsName = '';
 
 let startGame = function () {
 	setTimeout(function () {
+		getHighest();
 		gameOver = false;
 		assignColor(blocksArray);
 		pickAnswer();
@@ -62,7 +65,7 @@ let updateScore = function () {
 		actualCorrect++;
 	}else{
 		incorrect++;
-		actualCorrect = 0;
+		showSendScore();
 	}
 	actualCorrect > highscore ? highscore = actualCorrect : highscore = highscore;
 }
@@ -71,15 +74,57 @@ let updateScore = function () {
 let updateScoreText = function () {
 	if(isRightAnswer){
 		updateInnerHtml(`Total Correct: ${correct}`, totalCorrectCountElement);
-		updateInnerHtml(`Actual Correct: ${actualCorrect}`, actualCorrectCountElement);
+		updateInnerHtml(`Current Score: ${actualCorrect}`, actualCorrectCountElement);
 	}else{
 		updateInnerHtml(`Total Incorrect: ${incorrect}`, totalIncorrectCountElement);
-		updateInnerHtml(`Actual Correct: ${actualCorrect}`, actualCorrectCountElement);
+		updateInnerHtml(`Current Score: ${actualCorrect}`, actualCorrectCountElement);
 	}
 
 	if(correct >= highscore){
 		updateInnerHtml(`Highscore: ${highscore}`, highscoreElement);
 	}
+}
+
+let sendScore = function () {
+	console.log("CURRENTSCORE:" + actualCorrect);
+	axios.post('http://localhost:3000/highscores/', {
+		name: document.getElementById("name").value,
+		score: actualCorrect
+	})
+	.then(function(response){
+		getHighest();
+		console.log(response);
+		actualCorrect = 0;
+		updateScoreText();
+		hideSendScore();
+		startGame();
+	})
+	.catch(function(error){
+		console.log(error);
+	});
+}
+
+let getHighest = function() {
+	axios.get('http://localhost:3000/highest/')
+		.then(function(response){
+			console.log(response);
+			hsName = response.data.name;
+			highscore = response.data.score;
+			updateInnerHtml(`Highscore: ${hsName}, ${highscore}`, highscoreElement);
+		})
+		.catch(function(error){
+			console.log(error);
+		});
+}
+
+let showSendScore = function(){
+	let x = document.getElementById("formSender");
+	x.className = "show";
+}
+
+let hideSendScore = function (){
+	let x = document.getElementById("formSender");
+	x.className = "";
 }
 
 let assignColor = function (needsColor, color) {
