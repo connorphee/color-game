@@ -65,8 +65,7 @@ let updateScore = function () {
 		actualCorrect++;
 	}else{
 		incorrect++;
-		sendScore(actualCorrect);
-		actualCorrect = 0;
+		showSendScore();
 	}
 	actualCorrect > highscore ? highscore = actualCorrect : highscore = highscore;
 }
@@ -78,7 +77,7 @@ let updateScoreText = function () {
 		updateInnerHtml(`Current Score: ${actualCorrect}`, actualCorrectCountElement);
 	}else{
 		updateInnerHtml(`Total Incorrect: ${incorrect}`, totalIncorrectCountElement);
-		updateInnerHtml(`Actual Correct: ${actualCorrect}`, actualCorrectCountElement);
+		updateInnerHtml(`Current Score: ${actualCorrect}`, actualCorrectCountElement);
 	}
 
 	if(correct >= highscore){
@@ -86,13 +85,19 @@ let updateScoreText = function () {
 	}
 }
 
-let sendScore = function (actualCorrect) {
+let sendScore = function () {
+	console.log("CURRENTSCORE:" + actualCorrect);
 	axios.post('http://localhost:3000/highscores/', {
-		name: 'testing',
+		name: document.getElementById("name").value,
 		score: actualCorrect
 	})
 	.then(function(response){
+		getHighest();
 		console.log(response);
+		actualCorrect = 0;
+		updateScoreText();
+		hideSendScore();
+		startGame();
 	})
 	.catch(function(error){
 		console.log(error);
@@ -110,6 +115,16 @@ let getHighest = function() {
 		.catch(function(error){
 			console.log(error);
 		});
+}
+
+let showSendScore = function(){
+	let x = document.getElementById("formSender");
+	x.className = "show";
+}
+
+let hideSendScore = function (){
+	let x = document.getElementById("formSender");
+	x.className = "";
 }
 
 let assignColor = function (needsColor, color) {
