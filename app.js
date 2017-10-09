@@ -7,6 +7,7 @@ const totalIncorrectCountElement = document.getElementById(`totalIncorrect`);
 const actualCorrectCountElement = document.getElementById(`actualCorrect`);
 const highscoreElement = document.getElementById(`highscore`);
 const blocksArray = [];
+// import sendScore from './requests.js';
 
 /* Put blocks in array because querySelectorAll returns a node list rather than array
    which does not allow for checking of isArray and other native array methods
@@ -63,6 +64,7 @@ let updateScore = function () {
 	}else{
 		incorrect++;
 		actualCorrect = 0;
+		sendScore();
 	}
 	actualCorrect > highscore ? highscore = actualCorrect : highscore = highscore;
 }
@@ -81,6 +83,20 @@ let updateScoreText = function () {
 		updateInnerHtml(`Highscore: ${highscore}`, highscoreElement);
 	}
 }
+
+let sendScore = function () {
+	axios.post('http://localhost:3000/highscores/', {
+		name: 'testing',
+		score: 300
+	})
+	.then(function(response){
+		console.log(response);
+	})
+	.catch(function(error){
+		console.log(error);
+	});
+}
+
 
 let assignColor = function (needsColor, color) {
 	if (Array.isArray(needsColor)) {

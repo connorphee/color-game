@@ -1,3 +1,4 @@
+var cors = require('cors');
 var express = require('express'),
   app = express(),
   port = process.env.PORT || 3000,
@@ -11,6 +12,7 @@ mongoose.connect('mongodb://localhost/Highscoredb');
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 app.use(bodyParser.json());
 
 
