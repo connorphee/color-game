@@ -11,8 +11,20 @@ exports.list_all_highscores = function(req, res) {
     res.json(highscore);
   });
 };
-
-
+exports.get_highest_score = function(req, res) {
+  Highscore.find({}, function(err, highscore) {
+    if (err){
+      res.send(err);
+    }
+    let highest = highscore[0]
+    for(let i=1; i < highscore.length; i++){
+      if(highscore[i].score > highest.score){
+        highest = highscore[i];
+      }
+    }
+    res.json(highest);
+  });
+};
 
 
 exports.create_a_highscore = function(req, res) {
@@ -44,8 +56,6 @@ exports.update_a_highscore = function(req, res) {
 
 
 exports.delete_a_highscore = function(req, res) {
-
-
   Highscore.remove({
     _id: req.params.highscoreId
   }, function(err, highscore) {

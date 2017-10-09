@@ -22,9 +22,11 @@ let correct = 0;
 let actualCorrect = 0;
 let incorrect = 0;
 let highscore = 0;
+let hsName = '';
 
 let startGame = function () {
 	setTimeout(function () {
+		getHighest();
 		gameOver = false;
 		assignColor(blocksArray);
 		pickAnswer();
@@ -63,8 +65,8 @@ let updateScore = function () {
 		actualCorrect++;
 	}else{
 		incorrect++;
+		sendScore(actualCorrect);
 		actualCorrect = 0;
-		sendScore();
 	}
 	actualCorrect > highscore ? highscore = actualCorrect : highscore = highscore;
 }
@@ -73,7 +75,7 @@ let updateScore = function () {
 let updateScoreText = function () {
 	if(isRightAnswer){
 		updateInnerHtml(`Total Correct: ${correct}`, totalCorrectCountElement);
-		updateInnerHtml(`Actual Correct: ${actualCorrect}`, actualCorrectCountElement);
+		updateInnerHtml(`Current Score: ${actualCorrect}`, actualCorrectCountElement);
 	}else{
 		updateInnerHtml(`Total Incorrect: ${incorrect}`, totalIncorrectCountElement);
 		updateInnerHtml(`Actual Correct: ${actualCorrect}`, actualCorrectCountElement);
@@ -84,10 +86,10 @@ let updateScoreText = function () {
 	}
 }
 
-let sendScore = function () {
+let sendScore = function (actualCorrect) {
 	axios.post('http://localhost:3000/highscores/', {
 		name: 'testing',
-		score: 300
+		score: actualCorrect
 	})
 	.then(function(response){
 		console.log(response);
@@ -97,6 +99,18 @@ let sendScore = function () {
 	});
 }
 
+let getHighest = function() {
+	axios.get('http://localhost:3000/highest/')
+		.then(function(response){
+			console.log(response);
+			hsName = response.data.name;
+			highscore = response.data.score;
+			updateInnerHtml(`Highscore: ${hsName}, ${highscore}`, highscoreElement);
+		})
+		.catch(function(error){
+			console.log(error);
+		});
+}
 
 let assignColor = function (needsColor, color) {
 	if (Array.isArray(needsColor)) {

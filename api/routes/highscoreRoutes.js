@@ -12,4 +12,7 @@ module.exports = function(app) {
     .get(highscore.read_a_highscore)
     .put(highscore.update_a_highscore)
     .delete(highscore.delete_a_highscore);
+
+  app.route('/highest')
+    .get(highscore.get_highest_score);
 };
